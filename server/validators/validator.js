@@ -3,6 +3,10 @@ const validator = require("validator");
 
 module.exports.loginValidator = (data) => {
   let errors = {};
+
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+
   let emailError = validator.isEmpty(data.email)
     ? "Email is required"
     : !validator.isEmail(data.email)
@@ -24,6 +28,12 @@ module.exports.loginValidator = (data) => {
 
 module.exports.registerValidator = (data) => {
   let errors = {};
+
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+  data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
+  data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
+
   let emailError = validator.isEmpty(data.email)
     ? "Email is required"
     : !validator.isEmail(data.email)
