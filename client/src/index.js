@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import ReactDOM from "react-dom/client";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Auth from "./components/Auth/Auth";
+// import your route components too
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Auth />}></Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  </BrowserRouter>
 );
