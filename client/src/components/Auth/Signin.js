@@ -1,5 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function Signin() {
-  return <div className="sign-in-wrapper"></div>;
+export default function SignIn({ signIn }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  return (
+    <div className="sign-in-wrapper">
+      <div className="form">
+        <div className="input-wrapper">
+          <div>Email Address</div>
+          <input
+            className="input"
+            type="text"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="input-wrapper">
+          <div>Password</div>
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div className="btn" onClick={() => signIn(email, password)}>
+          Sign in
+        </div>
+      </div>
+    </div>
+  );
 }
