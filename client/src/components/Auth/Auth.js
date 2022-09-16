@@ -4,37 +4,38 @@ import SignIn from "./Signin";
 import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import "./Auth.css";
+import store from "../../store";
 
 export default function Auth() {
+  let navigate = useNavigate();
   const [tab, setTab] = useState("signin");
   const [showToast, setShowToast] = useState(false);
 
   const signIn = (email, password) => {
-    console.log(email, password);
-    // axios
-    //   .post("/api/users/login", { email, password })
-    //   .then((res) => {
-    //     if (res.data.success) {
-    //       store.dispatch({
-    //         type: "login",
-    //         _id: res.data.user._id,
-    //         user: res.data.user,
-    //         token: res.data.token,
-    //       });
-    //       useNavigate("/dashboard");
-    //     } else {
-    //       setShowToast(true);
-    //       setTimeout(() => {
-    //         setShowToast(false);
-    //       }, 3000);
-    //     }
-    //   })
-    //   .catch((er) => {
-    //     setShowToast(true);
-    //     setTimeout(() => {
-    //       setShowToast(false);
-    //     }, 3000);
-    //   });
+    axios
+      .post("/api/users/login", { email, password })
+      .then((res) => {
+        if (res.data.success) {
+          store.dispatch({
+            type: "login",
+            _id: res.data.user._id,
+            user: res.data.user,
+            token: res.data.token,
+          });
+          navigate("/dashboard");
+        } else {
+          setShowToast(true);
+          setTimeout(() => {
+            setShowToast(false);
+          }, 3000);
+        }
+      })
+      .catch((er) => {
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+      });
   };
 
   const signUp = ({ firstName, lastName, email, password }) => {
@@ -65,7 +66,7 @@ export default function Auth() {
         backgroundColor="#FF4539"
       /> */}
       <div className="left">
-        <img src="https://freesvg.org/img/chemist.png" />
+        <img alt="logo" src="https://freesvg.org/img/chemist.png" />
       </div>
 
       <div className="right">
@@ -74,7 +75,7 @@ export default function Auth() {
         {page}
         <div className="new" onClick={changeTab}>
           {tab === "signin"
-            ? "New to Quiz itt? Sign up here"
+            ? "New to Interview.uz? Sign up here"
             : "Already have an account with us? Sign in"}
         </div>
       </div>
