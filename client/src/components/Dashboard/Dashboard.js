@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
 export default function Dashboard() {
+  let navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("JWT_PAYLOAD")) {
-      this.props.history.push("/");
+      navigate("/");
     }
   });
 

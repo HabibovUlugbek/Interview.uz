@@ -3,6 +3,7 @@ import axios from "axios";
 import SignIn from "./Signin";
 import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
+import Toast from "../Toast/Toast";
 import "./Auth.css";
 import store from "../../store";
 
@@ -60,11 +61,11 @@ export default function Auth() {
 
   return (
     <div className="auth-wrapper">
-      {/* <Toast
-        model={t.showToast}
+      <Toast
+        model={showToast}
         message="Incorrect login"
         backgroundColor="#FF4539"
-      /> */}
+      />
       <div className="left">
         <img alt="logo" src="https://freesvg.org/img/chemist.png" />
       </div>
