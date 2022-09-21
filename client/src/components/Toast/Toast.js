@@ -32,7 +32,6 @@ export default class Toast extends React.Component {
       <div
         ref={this.toastRef}
         style={{
-          overflow: "scroll",
           position: "absolute",
           top: "15px",
           right: "15px",
