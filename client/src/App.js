@@ -4,6 +4,7 @@ import Auth from "./components/Auth/Auth";
 import Dashboard from "./components/Dashboard/Dashboard";
 import axios from "axios";
 import store from "./store";
+import CreateQuiz from "./components/CreateQuiz/CreateQuiz";
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,8 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create-quiz" element={<CreateQuiz />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

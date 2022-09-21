@@ -24,7 +24,7 @@ export default class Sidebar extends React.Component {
     if (store.getState().user) {
       return (
         <div className="sidebar-wrapper">
-          <div className="header">Quiz Itt</div>
+          <div className="header">Interview.uz</div>
 
           <div className="user">
             <div
@@ -45,14 +45,11 @@ export default class Sidebar extends React.Component {
             <NavLink to="/account">
               <div className="link">Account</div>
             </NavLink>
-            <NavLink to="/my-quizzes">
-              <div className="link">My Quizzes</div>
-            </NavLink>
             <NavLink to="/create-quiz">
               <div className="link">Create Quiz</div>
             </NavLink>
             <NavLink to="/my-quizzes">
-              <div className="link">My quizzes</div>
+              <div className="link">My Quizzes</div>
             </NavLink>
             <NavLink to="/community-quizzes">
               <div className="link">Community quizzes</div>
