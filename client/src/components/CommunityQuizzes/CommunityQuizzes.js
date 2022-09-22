@@ -39,7 +39,7 @@ export default function CommunityQuizzes() {
   };
 
   const takeQuiz = (quizId) => {
-    navigate(`/view-quiz/:${quizId}`);
+    navigate(`/view-quiz/${quizId}`);
   };
 
   return (

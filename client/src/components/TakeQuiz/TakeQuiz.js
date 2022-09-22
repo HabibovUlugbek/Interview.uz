@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./TakeQuiz.css";
-
 import $ from "jquery";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./TakeQuiz.css";
 
 export default function TakeQuiz() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  console.log(location.state.quiz);
   const [quiz, setQuiz] = useState({});
   const [authorized, setAuthorized] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -17,14 +17,12 @@ export default function TakeQuiz() {
 
   useEffect(() => {
     $("#modal-wrapper-quiz").hide();
-    if (this.props.location.state !== undefined) {
+    if (location.state !== undefined) {
       setAuthorized(true);
-      this.setState({
-        quiz: this.props.location.state.quiz,
-        answers: Array(this.props.location.state.quiz.questions.length).fill(0),
-      });
+      setQuiz(location.state.quiz);
+      setAnswers(Array(location.state.quiz.questions.length).fill(0));
     }
-  });
+  }, [location.state]);
 
   const prevQuestion = () => {
     let newIdx = activeQuestionIdx;
@@ -56,15 +54,15 @@ export default function TakeQuiz() {
       ans.selected = false;
     });
     questions.questions[activeQuestionIdx].answers[idx].selected = true;
-    let answers = answers;
+    let newAnswers = answers;
     if (ans.name === quiz.questions[activeQuestionIdx].correctAnswer) {
-      answers[activeQuestionIdx] = true;
+      newAnswers[activeQuestionIdx] = true;
     } else {
-      answers[activeQuestionIdx] = false;
+      newAnswers[activeQuestionIdx] = false;
     }
     setQuiz(questions);
-    setAnswers(answers);
-    getPercentage(answers);
+    setAnswers(newAnswers);
+    getPercentage(newAnswers);
   };
 
   const showModal = () => {

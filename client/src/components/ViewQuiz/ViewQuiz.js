@@ -25,7 +25,7 @@ export default function ViewQuiz() {
   };
   const refreshQuiz = () => {
     axios
-      .get("/api/quizzes/get-quiz/" + id)
+      .get(`/api/quizzes/get-quiz/${id}`)
       .then((res) => {
         if (res.data) {
           setIsLoading(false);
@@ -43,7 +43,7 @@ export default function ViewQuiz() {
   });
 
   const startQuiz = () => {
-    navigate(`/take-quiz/${id}`);
+    navigate(`/take-quiz/${id}`, { state: { quiz } });
   };
 
   const addComment = () => {

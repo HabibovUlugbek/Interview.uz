@@ -4,7 +4,6 @@ import "./CreateQuiz.css";
 import Dialog from "../Dialog/Dialog";
 import axios from "axios";
 import Toast from "../Toast/Toast";
-// import Toast from "../Toast/Toast";
 
 export default function CreateQuiz() {
   const [categoryVal, setCategoryVal] = useState("Backend");

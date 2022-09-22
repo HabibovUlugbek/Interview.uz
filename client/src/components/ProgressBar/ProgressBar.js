@@ -31,7 +31,7 @@ const ProgressBar = (props) => {
         />
         <circle
           className="svg-circle"
-          ß
+          ß="true"
           ref={circleRef}
           stroke={circleTwoStroke}
           cx={center}
