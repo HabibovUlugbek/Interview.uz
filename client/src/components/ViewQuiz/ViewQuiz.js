@@ -4,8 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ViewQuiz() {
+  let { id } = useParams();
+
   const navigate = useNavigate();
-  const [id, setId] = useState("");
   const [quiz, setQuiz] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [inputVal, setInputVal] = useState("");
@@ -38,9 +39,6 @@ export default function ViewQuiz() {
   };
 
   useEffect(() => {
-    let { id } = useParams();
-
-    setId(id);
     refreshQuiz();
   });
 

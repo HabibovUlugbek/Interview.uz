@@ -51,7 +51,6 @@
 
 .view-quiz .body .left .comments {
     height: 600px;
-    overflow-y: scroll;
     background-color: #d9e1f3;
     padding-bottom: 25px;
     width: 100%;
@@ -151,7 +150,6 @@
 
 .view-quiz .body .right .questions-wrapper {
     padding: 10px;
-    overflow-y: scroll;
     height: 600px;
     position: relative;
 }
