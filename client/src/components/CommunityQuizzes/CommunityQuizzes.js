@@ -39,7 +39,7 @@ export default function CommunityQuizzes() {
   };
 
   const takeQuiz = (quizId) => {
-    navigate("/view-quiz?id=" + quizId);
+    navigate(`/view-quiz/:${quizId}`);
   };
 
   return (
@@ -54,7 +54,7 @@ export default function CommunityQuizzes() {
           {quizzes.map((quiz, idx) => (
             <div key={idx} className="quiz-card card">
               <img
-                alt="image"
+                alt={quiz.id}
                 src={
                   quiz.imgUrl ||
                   "https://images.unsplash.com/photo-1518770660439-4636190af475?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGVjaG5vbG9neXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
@@ -73,7 +73,7 @@ export default function CommunityQuizzes() {
                   <img
                     style={{ cursor: "pointer", padding: "5px" }}
                     onClick={() => likeQuiz(quiz._id)}
-                    alt="image"
+                    alt={quiz.id}
                     src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-512.png"
                   />
                 </div>

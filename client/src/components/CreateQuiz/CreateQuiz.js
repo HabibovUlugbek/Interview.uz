@@ -3,6 +3,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./CreateQuiz.css";
 import Dialog from "../Dialog/Dialog";
 import axios from "axios";
+import Toast from "../Toast/Toast";
 // import Toast from "../Toast/Toast";
 
 export default function CreateQuiz() {
@@ -93,7 +94,7 @@ export default function CreateQuiz() {
 
   return (
     <div className="create-quiz-wrapper">
-      {/* <Toast model={showToast} message="Quiz Created" /> */}
+      <Toast model={showToast} message="Quiz Created" />
       <div>
         <Sidebar />
       </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./ViewQuiz.css";
-import qs from "qs";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ViewQuiz() {
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [quiz, setQuiz] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ export default function ViewQuiz() {
 
   const checkAuth = () => {
     if (
-      quiz?.mustBeSigned &&
+      quiz.mustBeSigned &&
       localStorage.getItem("JWT_PAYLOAD") &&
       localStorage.getItem("_ID")
     ) {
@@ -21,22 +22,9 @@ export default function ViewQuiz() {
       setIsAuthenticated(false);
     }
   };
-
-  useEffect(() => {
-    let id = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    }).id;
-
-    setId(id);
-    refreshQuiz();
-  });
-
   const refreshQuiz = () => {
     axios
-      .get(
-        "/api/quizzes/get-quiz/" +
-          qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id
-      )
+      .get("/api/quizzes/get-quiz/" + id)
       .then((res) => {
         if (res.data) {
           setIsLoading(false);
@@ -49,13 +37,15 @@ export default function ViewQuiz() {
       });
   };
 
+  useEffect(() => {
+    let { id } = useParams();
+
+    setId(id);
+    refreshQuiz();
+  });
+
   const startQuiz = () => {
-    this.props.history.push({
-      pathname: "/take-quiz/" + id,
-      state: {
-        quiz,
-      },
-    });
+    navigate(`/take-quiz/${id}`);
   };
 
   const addComment = () => {
@@ -91,7 +81,9 @@ export default function ViewQuiz() {
                 {quiz.comments.map((com, idx) => (
                   <div className="comment" key={idx}>
                     <img
+                      alt={quiz.id}
                       style={{ borderRadius: "100%" }}
+                      img="avatar"
                       className="img"
                       src="https://img.pngio.com/png-avatar-108-images-in-collection-page-3-png-avatar-300_300.png"
                     />
@@ -147,9 +139,7 @@ export default function ViewQuiz() {
           </div>
           <div className="footer">
             <div className="buttons-wrapper">
-              <button onClick={() => this.props.history.goBack()}>
-                Go Back
-              </button>
+              <button onClick={() => navigate(-1)}>Go Back</button>
               <button onClick={startQuiz}>Take Quiz</button>
             </div>
           </div>
