@@ -9,6 +9,8 @@ import MyQuizzes from "./components/MyQuizzes/MyQuizzes";
 import CommunityQuizzes from "./components/CommunityQuizzes/CommunityQuizzes";
 import ViewQuiz from "./components/ViewQuiz/ViewQuiz";
 import TakeQuiz from "./components/TakeQuiz/TakeQuiz";
+import Profile from "./components/Profile/Profile";
+import ViewResults from "./components/ViewResults/ViewResults";
 
 class App extends Component {
   componentDidMount() {
@@ -41,11 +43,14 @@ class App extends Component {
             <Route path=":id" component={<ViewQuiz />} />
           </Route>
           <Route path="/take-quiz" element={<TakeQuiz />}>
-            <Route index path="*" component={<TakeQuiz />} />
-            <Route path=":id" component={<TakeQuiz />} />
+            <Route index path="*" element={<TakeQuiz />} />
+            <Route path=":id" element={<TakeQuiz />} />
           </Route>
-          {/* <Route path="/view-results" component={ViewResults} />
-          <Route path="/account" component={Profile} /> */}
+          <Route path="/view-results" element={<ViewResults />}>
+            <Route index path="*" element={<ViewResults />} />
+            <Route path=":id" element={<ViewResults />} />
+          </Route>
+          <Route path="/account" element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

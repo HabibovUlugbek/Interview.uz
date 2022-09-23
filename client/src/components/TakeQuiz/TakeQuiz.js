@@ -8,7 +8,6 @@ import "./TakeQuiz.css";
 export default function TakeQuiz() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state.quiz);
   const [quiz, setQuiz] = useState({});
   const [authorized, setAuthorized] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -82,12 +81,11 @@ export default function TakeQuiz() {
       })
       .then((res) => {
         if (res.data) {
-          navigate("/view-results/" + res.data.scoreId);
+          navigate(`/view-results/${res.data.scoreId}`);
         }
       });
   };
 
-  // let { quiz, activeQuestionIdx } = this.state;
   return (
     <React.Fragment>
       <div id="modal-wrapper-quiz" className="modal-wrapper-quiz">

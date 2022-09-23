@@ -3,6 +3,7 @@ const Users = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const { cloudinary } = require("../config/cloudinary");
 const {
   loginValidator,
   registerValidator,
@@ -89,6 +90,36 @@ router.get("/:id", auth, async (req, res) => {
     }
   } catch (error) {
     res.json({ message: error.message, success: false });
+  }
+});
+
+router.post("/upload-image", auth, async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr);
+    Users.findOne({ _id: req.body._id }).then((user) => {
+      user.avatar = {
+        url: uploadedResponse.url,
+        publicId: uploadedResponse.public_id,
+      };
+      user.save();
+      if (user.images) {
+        user.images.push({
+          url: uploadedResponse.url,
+          publicId: uploadedResponse.public_id,
+        });
+      } else {
+        user.images = [];
+        user.images.push({
+          url: uploadedResponse.url,
+          publicId: uploadedResponse.public_id,
+        });
+      }
+      res.json({ success: true });
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Something went wrong, try again." });
   }
 });
 
