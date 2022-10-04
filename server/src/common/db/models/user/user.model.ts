@@ -34,8 +34,6 @@ export class User extends BaseModel {
   @prop({ trim: true })
   fullName?: string;
 
-  @prop({ trim: true })
-  imgUrl?: string;
 
   @prop({
     type: () => Avatar,

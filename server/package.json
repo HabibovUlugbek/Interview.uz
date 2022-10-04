@@ -4,8 +4,11 @@
   "description": "Preparing to the interview ,You can find mots frequently interview questions",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index"
+    "build": "tsc",
+    "start-admin": "node ./dist/admin/server.js",
+    "start-user": "node ./dist/user/server.js",
+    "dev-admin": "nodemon --exec ts-node -- --files ./src/admin/server.ts",
+    "dev-user": "nodemon --exec ts-node -- --files ./src/user/server.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,13 +1,13 @@
 import express from "express";
+import cors from "cors"
+import bodyParser from "body-parser";
 import { ENV } from "../common/config";
 import { BaseResponse } from "../common/reporter/base.response";
 // import fileUpload from "express-fileupload"
-// import { connectDB } from "../common/db/connector";
+import { connectDB } from "../common/db/connectors";
 // import path from "path"
 
-// import { ENV } from "../common/config";
-
-// import userRouter from "./routes/user/user.route";
+import userRouter from "./routes/user/user.route";
 // import courseRouter from "./routes/course/course.route";
 // import orderRouter from "./routes/order/order.route";
 // import orderItemsRouter from "./routes/order/orderItems/orderItems.route"
@@ -22,13 +22,16 @@ import { BaseResponse } from "../common/reporter/base.response";
 
 !(async function () {
     const app = express();
-    // await connectDB();
+    await connectDB();
 
     // app.use(fileUpload())
-    // app.use(express.json());
+    app.use(express.json());
+    app.use(cors());
+    app.use(bodyParser.urlencoded({ extended: true, limit: "20mb" }));
+    app.use(bodyParser.json({ limit: "20mb" }));
 
     // app.use("/video", videoRouter)
-    // app.use("/users", userRouter);
+    app.use("/api/users/", userRouter);
     // app.use("/users/courseSavedLists/mySavedList", savedListRouter)
     // app.use("/courses", courseRouter);
     // app.use("/orders", orderRouter);
