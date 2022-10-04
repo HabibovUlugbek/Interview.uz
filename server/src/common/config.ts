@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import path from "path";
+const cloudinary = require("cloudinary").v2;
+
 dotenv.config({
   path: path.resolve(__dirname, "../../.env"),
 });
@@ -18,3 +20,11 @@ export const API = {
   admin_api: process.env.ADMIN_API || "admin",
   user_api: process.env.USER_API || "user",
 };
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  api_key: process.env.CLOUDINARY_API_KEY,
+});
+
+export default cloudinary;

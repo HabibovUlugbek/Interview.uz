@@ -1,6 +1,6 @@
-// import { ModelType, Ref } from "@typegoose/typegoose/lib/types";
+import { ModelType, Ref } from "@typegoose/typegoose/lib/types";
 import { Types, QueryOptions, AggregateOptions } from "mongoose";
-// import { PagingDto } from "../validation/dto/paging.dto";
+import { PagingDto } from "../validation/dto/paging.dto";
 
 export class CommonServices<T> {
   constructor(public model: ModelType<T>) { }

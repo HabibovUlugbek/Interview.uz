@@ -5,9 +5,10 @@ export function auth(req: any, res: any, next: Function) {
   try {
     let token = req.headers["authorization"].split(" ")[2];
     const decoded = jwt.verify(token, ENV.TOKEN_KEY);
-    req.userData = decoded;
+    req.user = decoded;
     next();
   } catch (error) {
     return res.status(401).json({ msg: "Not authorozed" });
   }
 };
+
